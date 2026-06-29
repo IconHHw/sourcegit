@@ -71,7 +71,7 @@ namespace SourceGit.Models
 
                     if (email == null)
                     {
-                        Thread.Sleep(100);
+                        await Task.Delay(100);
                         continue;
                     }
 
@@ -94,15 +94,15 @@ namespace SourceGit.Models
                         var rsp = await client.GetAsync(url);
                         if (rsp.IsSuccessStatusCode)
                         {
-                            using (var stream = rsp.Content.ReadAsStream())
+                            await using (var stream = await rsp.Content.ReadAsStreamAsync())
                             {
-                                using (var writer = File.Create(localFile))
+                                await using (var writer = File.Create(localFile))
                                 {
-                                    stream.CopyTo(writer);
+                                    await stream.CopyToAsync(writer);
                                 }
                             }
 
-                            using (var reader = File.OpenRead(localFile))
+                            await using (var reader = File.OpenRead(localFile))
                             {
                                 img = Bitmap.DecodeToWidth(reader, 128);
                             }

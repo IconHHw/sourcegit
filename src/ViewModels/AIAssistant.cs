@@ -54,7 +54,7 @@ namespace SourceGit.ViewModels
         public async Task GenAsync()
         {
             if (_cancel is { IsCancellationRequested: false })
-                _cancel.Cancel();
+                await _cancel.CancelAsync();
             _cancel = new CancellationTokenSource();
 
             var agent = new AI.Agent(_service);

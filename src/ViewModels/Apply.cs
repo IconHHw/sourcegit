@@ -91,7 +91,7 @@ namespace SourceGit.ViewModels
                 }
 
                 finalPatchFile = Path.GetTempFileName();
-                File.WriteAllText(finalPatchFile, content);
+                await File.WriteAllTextAsync(finalPatchFile, content);
             }
 
             var log = _repo.CreateLog("Apply Patch");

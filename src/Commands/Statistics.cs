@@ -20,7 +20,7 @@ namespace SourceGit.Commands
                 return statistics;
 
             var sr = new StringReader(rs.StdOut);
-            while (sr.ReadLine() is { } line)
+            while (await sr.ReadLineAsync() is { } line)
                 ParseLine(statistics, line);
 
             statistics.Complete();

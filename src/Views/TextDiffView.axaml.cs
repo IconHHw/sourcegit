@@ -983,7 +983,7 @@ namespace SourceGit.Views
             var tmpFile = Path.GetTempFileName();
             patch.Generate(tmpFile, false);
 
-            var patchText = File.ReadAllText(tmpFile);
+            var patchText = await File.ReadAllTextAsync(tmpFile);
             File.Delete(tmpFile);
             await this.CopyTextAsync(patchText);
         }
